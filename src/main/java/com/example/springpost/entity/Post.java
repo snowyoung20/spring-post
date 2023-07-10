@@ -1,14 +1,7 @@
 package com.example.springpost.entity;
 
 import com.example.springpost.dto.PostRequestDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +21,7 @@ public class Post extends TimeStamped {
 	@Column(nullable = false)
 	private String content;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 
