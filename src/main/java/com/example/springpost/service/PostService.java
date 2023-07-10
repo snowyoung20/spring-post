@@ -45,6 +45,7 @@ public class PostService {
 	public void deletePost(Long id, User user) {
 		Post post = findPost(id);
 
+		// 작성자와 요청자가 같은지 체크
 		if (!post.getUser().equals(user)) {
 			throw new RejectedExecutionException();
 		}
@@ -56,6 +57,7 @@ public class PostService {
 	public PostResponseDto updatePost(Long id, PostRequestDto requestDto, User user) {
 		Post post = findPost(id);
 
+		// 작성자와 요청자가 같은지 체크
 		if (!post.getUser().equals(user)) {
 			throw new RejectedExecutionException();
 		}
