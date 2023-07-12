@@ -3,6 +3,7 @@ package com.example.springpost.config;
 import com.example.springpost.jwt.JwtAuthorizationFilter;
 import com.example.springpost.jwt.JwtUtil;
 import com.example.springpost.security.UserDetailsServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * 1. 인증설정
+ * WebSecurityConfig > jwtUtil > UsernamePasswordAuthenticationFilter > SecurityFilterChain > 요청별 인증수행
+ */
 @Configuration
 @EnableWebSecurity // Spring Security 지원을 가능하게 함
 @RequiredArgsConstructor
@@ -25,6 +30,7 @@ public class WebSecurityConfig {
 
 	private final JwtUtil jwtUtil;
 	private final UserDetailsServiceImpl userDetailsService;
+	private final ObjectMapper objectMapper;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -38,7 +44,7 @@ public class WebSecurityConfig {
 
 	@Bean
 	public JwtAuthorizationFilter jwtAuthorizationFilter() {
-		return new JwtAuthorizationFilter(jwtUtil, userDetailsService);
+		return new JwtAuthorizationFilter(jwtUtil, userDetailsService, objectMapper);
 	}
 
 	@Bean

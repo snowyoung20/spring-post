@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * 3. 인증정보 구현체
+ * UserDetails 구현체 > UserDetailsImpl
+ */
 public class UserDetailsImpl implements UserDetails {
 
 	private final User user;
