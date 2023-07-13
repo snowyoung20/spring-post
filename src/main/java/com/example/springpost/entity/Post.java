@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,12 +24,18 @@ public class Post extends TimeStamped {
 	@Column(nullable = false)
 	private String content;
 
+	@Column(name = "likes")
+	private int likesCount = 0;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-	private List<Comment> comments;
+	private List<Comment> comments = new ArrayList<>();
+
+	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+	private List<Likes> likes = new ArrayList<>();
 
 	public Post(PostRequestDto requestDto) {
 		this.title = requestDto.getTitle();
@@ -45,5 +52,13 @@ public class Post extends TimeStamped {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public void increaseLikesCount() {
+		this.likesCount++;
+	}
+
+	public void decreaseLikesCount() {
+		this.likesCount--;
 	}
 }

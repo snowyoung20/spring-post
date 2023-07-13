@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
+@Entity
 @NoArgsConstructor
 @Table(name = "comment")
 public class Comment extends TimeStamped {
@@ -17,6 +20,9 @@ public class Comment extends TimeStamped {
 	@Column(nullable = false)
 	private String body;
 
+	@Column(nullable = false)
+	private int likesCount = 0;
+
 	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private Post post;
@@ -24,6 +30,9 @@ public class Comment extends TimeStamped {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+	private List<Likes> likes = new ArrayList<>();
 
 	public Comment(String body) {
 		this.body = body;
@@ -39,5 +48,13 @@ public class Comment extends TimeStamped {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public void increaseLikesCount() {
+		this.likesCount++;
+	}
+
+	public void decreaseLikesCount() {
+		this.likesCount--;
 	}
 }

@@ -41,7 +41,7 @@ public class CommentController {
 			CommentResponseDto result = commentService.updateComment(id, requestDto, userDetails.getUser());
 			return ResponseEntity.ok().body(result);
 		} catch (RejectedExecutionException e) {
-			return ResponseEntity.badRequest().body(new ApiResponseDto("작성자만 수정 할 수 있습니다.", HttpStatus.BAD_REQUEST.value()));
+			return ResponseEntity.badRequest().body(new ApiResponseDto("작성자만 수정할 수 있습니다.", HttpStatus.BAD_REQUEST.value()));
 		}
 	}
 
@@ -51,7 +51,7 @@ public class CommentController {
 			commentService.deleteComment(id, userDetails.getUser());
 			return ResponseEntity.ok().body(new ApiResponseDto("댓글 삭제 성공", HttpStatus.OK.value()));
 		} catch (RejectedExecutionException e) {
-			return ResponseEntity.badRequest().body(new ApiResponseDto("작성자만 삭제 할 수 있습니다.", HttpStatus.BAD_REQUEST.value()));
+			return ResponseEntity.badRequest().body(new ApiResponseDto("작성자만 삭제할 수 있습니다.", HttpStatus.BAD_REQUEST.value()));
 		}
 	}
 }
