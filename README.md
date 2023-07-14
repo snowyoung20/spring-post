@@ -76,8 +76,13 @@ https://ajar-output-265.notion.site/1b05d97222ba42b0ad7cfeb42acc1112?v=68a767e42
 
 # Questions
 1. Spring Security를 적용했을 때 어떤 점이 도움이 되셨나요?
+   - .
 2. Spring Security를 사용하지 않는다면 어떻게 인증/인가를 효율적으로 처리할 수 있을까요?
+   - .
 3. AOP에 대해 설명해 주세요!
+   - .
 4. RefreshToken 적용에 대한 장/단점을 작성해 주세요! 적용해 보지 않으셨다면 JWT를 사용하여 인증/인가를 구현 했을 때의 장/단점에 대해 숙련주차의 답변을 Upgrade 하여 작성해 주세요!
+   - .
 5. 즉시로딩 / 지연로딩에 대해 설명해 주세요!
+    - .
 
