@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,10 @@ public class UserController {
 	private final JwtUtil jwtUtil;
 
 	@PostMapping("/signup")
-	public ResponseEntity<ApiResponseDto> signUp(@Valid @RequestBody AuthRequestDto requestDto) {
+	public ResponseEntity<ApiResponseDto> signUp(@Valid @RequestBody AuthRequestDto requestDto, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			throw new IllegalArgumentException("아이디/비밀번호의 구성이 올바르지 않습니다.");
+		}
 
 		try {
 			userService.signup(requestDto);
